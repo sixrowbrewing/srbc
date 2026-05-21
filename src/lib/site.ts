@@ -1,3 +1,5 @@
+export type NavItem = { label: string; href: string };
+
 export const siteConfig = {
   name: "Six Row Brewing Consulting",
   shortName: "SRBC",
@@ -25,7 +27,7 @@ export const siteConfig = {
   nav: [
     { label: "Services", href: "/services" },
     { label: "Contact", href: "/contact" },
-  ],
-} as const;
+  ] as ReadonlyArray<NavItem>,
+};
 
 export type SiteConfig = typeof siteConfig;
