@@ -1,0 +1,31 @@
+import Link from "next/link";
+import { Container } from "@/components/shared/container";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+export default function ServiceNotFound() {
+  return (
+    <section className="py-32" aria-labelledby="not-found-title">
+      <Container className="text-center">
+        <p className="text-sm font-semibold uppercase tracking-widest text-accent">
+          404
+        </p>
+        <h1
+          id="not-found-title"
+          className="mt-3 font-heading text-display-lg font-semibold text-foreground"
+        >
+          Service not found
+        </h1>
+        <p className="mx-auto mt-4 max-w-md text-muted-foreground">
+          The service you&rsquo;re looking for doesn&rsquo;t exist or has been moved.
+        </p>
+        <Link
+          href="/services"
+          className={cn(buttonVariants({ size: "lg" }), "mt-8")}
+        >
+          Back to services
+        </Link>
+      </Container>
+    </section>
+  );
+}
