@@ -50,7 +50,7 @@ export function organizationJsonLd() {
     alternateName: siteConfig.shortName,
     description: siteConfig.description,
     url: siteConfig.url,
-    telephone: siteConfig.contact.phone,
+    // telephone: siteConfig.contact.phone,
     email: siteConfig.contact.email,
     address: {
       "@type": "PostalAddress",

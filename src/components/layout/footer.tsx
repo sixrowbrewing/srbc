@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin /*, MessageCircle, Phone */ } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { siteConfig } from "@/lib/site";
 import { services } from "@/content/services";
-import { whatsappLink } from "@/lib/utils";
+// import { whatsappLink } from "@/lib/utils";
 import logo from "@/assets/srbclogo-dark.png";
 
 export function Footer() {
@@ -56,7 +56,7 @@ export function Footer() {
                   {siteConfig.contact.address.country}
                 </span>
               </p>
-              <p className="flex items-center gap-3">
+              {/* <p className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-accent" aria-hidden />
                 <a
                   href={`tel:${siteConfig.contact.phoneRaw}`}
@@ -64,7 +64,7 @@ export function Footer() {
                 >
                   {siteConfig.contact.phone}
                 </a>
-              </p>
+              </p> */}
               <p className="flex items-center gap-3">
                 <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden />
                 <a
@@ -74,7 +74,7 @@ export function Footer() {
                   {siteConfig.contact.email}
                 </a>
               </p>
-              <p className="flex items-center gap-3">
+              {/* <p className="flex items-center gap-3">
                 <MessageCircle
                   className="h-4 w-4 shrink-0 text-accent"
                   aria-hidden
@@ -87,7 +87,7 @@ export function Footer() {
                 >
                   WhatsApp us
                 </a>
-              </p>
+              </p> */}
             </address>
           </div>
 

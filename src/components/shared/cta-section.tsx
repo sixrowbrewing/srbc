@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight /*, MessageCircle */ } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Container } from "./container";
-import { cn, whatsappLink } from "@/lib/utils";
+import { cn /*, whatsappLink */ } from "@/lib/utils";
 
 interface CtaSectionProps {
   title: string;
@@ -16,7 +16,7 @@ export function CtaSection({
   title,
   description,
   primary = { label: "Contact us", href: "/contact" },
-  whatsappMessage,
+  // whatsappMessage,
   eyebrow = "Let's brew together",
 }: CtaSectionProps) {
   return (
@@ -50,7 +50,7 @@ export function CtaSection({
               {primary.label}
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
-            <a
+            {/* <a
               href={whatsappLink(whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
@@ -61,7 +61,7 @@ export function CtaSection({
             >
               <MessageCircle className="h-5 w-5" aria-hidden />
               WhatsApp us
-            </a>
+            </a> */}
           </div>
         </div>
       </Container>

@@ -1,6 +1,6 @@
-import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin /*, MessageCircle, Phone */ } from "lucide-react";
 import { siteConfig } from "@/lib/site";
-import { whatsappLink } from "@/lib/utils";
+// import { whatsappLink } from "@/lib/utils";
 
 export function ContactInfo() {
   return (
@@ -27,7 +27,7 @@ export function ContactInfo() {
               {siteConfig.contact.address.country}
             </span>
           </div>
-          <div className="flex items-start gap-3">
+          {/* <div className="flex items-start gap-3">
             <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
               <Phone className="h-4 w-4" aria-hidden />
             </span>
@@ -37,7 +37,7 @@ export function ContactInfo() {
             >
               {siteConfig.contact.phone}
             </a>
-          </div>
+          </div> */}
           <div className="flex items-start gap-3">
             <span className="mt-0.5 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent">
               <Mail className="h-4 w-4" aria-hidden />
@@ -52,7 +52,7 @@ export function ContactInfo() {
         </address>
       </div>
 
-      <div className="rounded-2xl bg-primary p-8 text-primary-foreground shadow-sm">
+      {/* <div className="rounded-2xl bg-primary p-8 text-primary-foreground shadow-sm">
         <h2 className="font-heading text-xl font-semibold">Need urgent help?</h2>
         <p className="mt-2 text-sm text-primary-foreground/80">
           Call us for urgent consultations or reach us instantly on WhatsApp.
@@ -69,7 +69,7 @@ export function ContactInfo() {
           <MessageCircle className="h-4 w-4" aria-hidden />
           Message on WhatsApp
         </a>
-      </div>
+      </div> */}
     </aside>
   );
 }

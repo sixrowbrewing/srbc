@@ -8,11 +8,10 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Contact SRBC | Brewery Consultant in Pune, India",
   description:
-    "Contact SRBC for microbrewery setup, brewpub consulting in Pune, Maharashtra. Call +91 8559907991 or email sixrowbrewing@gmail.com.",
+    "Contact SRBC for microbrewery setup and brewpub consulting in Pune, Maharashtra. Send a message and we typically respond within one business day.",
   path: "/contact",
   keywords: [
     "contact brewery consultant Pune",
-    "microbrewery consultant phone number",
     "brewpub setup inquiry Pune",
     "Six Row Brewing Consulting contact",
   ],
@@ -24,7 +23,7 @@ export default function ContactPage() {
       <PageHero
         eyebrow="Get In Touch"
         title="Let's discuss your brewing goals"
-        description="We typically respond within one business day. For urgent matters, reach us by phone or WhatsApp."
+        description="Send us a message and we typically respond within one business day."
       />
       <section className="py-16 md:py-24" aria-label="Contact options">
         <Container>

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import { Navigation } from "@/components/layout/navigation";
 import { Footer } from "@/components/layout/footer";
-import { WhatsAppButton } from "@/components/layout/whatsapp-button";
+// import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { siteConfig } from "@/lib/site";
 import { organizationJsonLd } from "@/lib/seo";
 import logo from "@/assets/favicon.png";
@@ -91,7 +91,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <WhatsAppButton />
+        {/* <WhatsAppButton /> */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
