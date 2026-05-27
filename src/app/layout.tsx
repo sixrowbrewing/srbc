@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { siteConfig } from "@/lib/site";
 import { organizationJsonLd } from "@/lib/seo";
+import logo from "@/assets/favicon.png";
 import "./globals.css";
 
 const inter = Inter({
@@ -37,8 +38,33 @@ export const metadata: Metadata = {
     address: false,
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      {
+        url: logo.src,
+        sizes: `${logo.width}x${logo.height}`,
+        type: "image/png",
+      },
+    ],
+    apple: logo.src,
+    shortcut: logo.src,
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: logo.src,
+        width: logo.width,
+        height: logo.height,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [logo.src],
   },
 };
 
@@ -61,7 +87,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Navigation />
-        <main id="main-content" className="pt-16 md:pt-20">
+        <main id="main-content" className="pt-20 md:pt-24">
           {children}
         </main>
         <Footer />

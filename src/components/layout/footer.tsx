@@ -12,7 +12,7 @@ export function Footer() {
         Footer
       </h2>
       <Container className="py-16">
-        <div className="grid gap-12 md:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-3">
           <div className="md:col-span-2 max-w-sm">
             <p className="font-heading text-2xl font-bold tracking-tight text-accent-foreground">
               {siteConfig.shortName}
@@ -71,37 +71,6 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <p className="font-heading text-sm font-semibold uppercase tracking-widest text-accent-foreground">
-              Company
-            </p>
-            <ul className="mt-4 space-y-2 text-sm">
-              <li>
-                <Link
-                  href="/services"
-                  className="text-primary-foreground/80 transition-colors hover:text-accent-foreground"
-                >
-                  All Services
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/audit"
-                  className="text-primary-foreground/80 transition-colors hover:text-accent-foreground"
-                >
-                  Performance Audit
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-primary-foreground/80 transition-colors hover:text-accent-foreground"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
 
         <div className="mt-12 border-t border-primary-foreground/10 pt-6 text-sm text-primary-foreground/60">

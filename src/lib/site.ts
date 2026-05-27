@@ -11,7 +11,7 @@ export const siteConfig = {
   contact: {
     phone: "+91 8559907991",
     phoneRaw: "918559907991",
-    email: "info@sixrowbrewing.com",
+    email: "sixrowbrewing@gmail.com",
     address: {
       line1: "Six Row Brewing Consulting",
       city: "Pune",

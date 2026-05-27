@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${service.title} | Brewery Consulting`,
     description: service.description,
     path: `/services/${service.slug}`,
-    image: service.image,
+    image: service.image.src,
   });
 }
 

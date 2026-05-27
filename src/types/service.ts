@@ -1,3 +1,4 @@
+import type { StaticImageData } from "next/image";
 import type { LucideIcon } from "lucide-react";
 
 export type ServiceSlug =
@@ -8,6 +9,8 @@ export type ServiceSlug =
   | "strategy"
   | "sustainability"
   | "microbrewery"
+  | "gypsy"
+  | "dispense"
   | "audit";
 
 export interface ServiceOffering {
@@ -27,7 +30,7 @@ export interface ServiceSummary {
   title: string;
   shortTitle: string;
   description: string;
-  image: string;
+  image: StaticImageData;
 }
 
 export interface ServiceDetail extends ServiceSummary {

@@ -37,27 +37,36 @@ import {
   CheckCircle2,
   GraduationCap,
   Briefcase,
+  Compass,
+  Gauge,
+  Thermometer,
   type LucideIcon,
 } from "lucide-react";
+import type { StaticImageData } from "next/image";
 import type { ServiceDetail, ServiceSlug, ServiceSummary } from "@/types/service";
 
-const heroImages: Record<ServiceSlug, string> = {
-  operations:
-    "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=720&fit=crop",
-  recipe:
-    "https://images.unsplash.com/photo-1612528443702-f6741f70a049?w=1200&h=720&fit=crop",
-  engineering:
-    "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1200&h=720&fit=crop",
-  quality:
-    "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&h=720&fit=crop",
-  strategy:
-    "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=720&fit=crop",
-  sustainability:
-    "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=1200&h=720&fit=crop",
-  microbrewery:
-    "https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=1200&h=720&fit=crop",
-  audit:
-    "https://images.unsplash.com/photo-1554224311-beee460ae6ba?w=1200&h=720&fit=crop",
+import operationsImage from "@/assets/operations&manufacturing.png";
+import recipeImage from "@/assets/recipe-developement.png";
+import engineeringImage from "@/assets/engineering&design.png";
+import qualityImage from "@/assets/quality-assurance.png";
+import strategyImage from "@/assets/strategy-finance.png";
+import sustainabilityImage from "@/assets/sustainability-solutions.png";
+import microbreweryImage from "@/assets/microbrewery.png";
+import gypsyImage from "@/assets/gypsybrewing.png";
+import dispenseImage from "@/assets/dispance-setup.png";
+import auditImage from "@/assets/performance-audit.png";
+
+const heroImages: Record<ServiceSlug, StaticImageData> = {
+  operations: operationsImage,
+  recipe: recipeImage,
+  engineering: engineeringImage,
+  quality: qualityImage,
+  strategy: strategyImage,
+  sustainability: sustainabilityImage,
+  microbrewery: microbreweryImage,
+  gypsy: gypsyImage,
+  dispense: dispenseImage,
+  audit: auditImage,
 };
 
 export const services: ServiceDetail[] = [
@@ -455,6 +464,130 @@ export const services: ServiceDetail[] = [
       "Profitability within 12 months",
       "Award-winning beers",
       "Sustainable model",
+    ],
+  },
+  {
+    slug: "gypsy",
+    icon: Compass,
+    title: "Gypsy Brewing & Contract Brewing",
+    shortTitle: "Gypsy Brewing",
+    tagline: "Launch a Brewing Brand Without Owning a Brewery",
+    description:
+      "Build a craft beer brand using shared brewing capacity. We help you find host breweries, lock in production agreements, and maintain consistent quality across multiple sites.",
+    image: heroImages.gypsy,
+    offerings: [
+      {
+        icon: Building2,
+        name: "Partner Brewery Sourcing",
+        description:
+          "Identify and vet host breweries with the right capacity, equipment, and culture fit for your brand.",
+      },
+      {
+        icon: FileText,
+        name: "Contract & Capacity Agreements",
+        description:
+          "Structure brewing contracts, IP protection, pricing, and capacity commitments that protect your brand.",
+      },
+      {
+        icon: ClipboardList,
+        name: "Recipe & Process Documentation",
+        description:
+          "Standardize recipes, brewing logs, and SOPs so any host brewery can reproduce your beer faithfully.",
+      },
+      {
+        icon: ShieldCheck,
+        name: "Quality Control Across Hosts",
+        description:
+          "Sensory panels, analytical testing protocols, and audits that maintain consistency batch to batch, site to site.",
+      },
+      {
+        icon: Target,
+        name: "Brand & Market Strategy",
+        description:
+          "Positioning, distribution planning, and launch strategy purpose-built for a nomadic brewing brand.",
+      },
+      {
+        icon: Map,
+        name: "Multi-Site Production Scaling",
+        description:
+          "Coordinate production across multiple host breweries to expand reach without owning infrastructure.",
+      },
+    ],
+    process: [
+      { step: "Brand Concept", description: "Define beer styles, brand identity, and target market" },
+      { step: "Partner Match", description: "Source, vet, and onboard host breweries" },
+      { step: "Production", description: "Recipe transfer, pilot brews, and quality verification" },
+      { step: "Launch & Scale", description: "Distribution, marketing, and multi-site coordination" },
+    ],
+    outcomes: [
+      "Launch with minimal capex",
+      "Time to market in 3-6 months",
+      "Multi-region production reach",
+      "Brand-led growth strategy",
+      "Flexibility to scale or pivot",
+      "Lower operational risk",
+    ],
+  },
+  {
+    slug: "dispense",
+    icon: Gauge,
+    title: "Dispense Setup & Draft System Design",
+    shortTitle: "Dispense Setup",
+    tagline: "Engineer the Perfect Pour, Every Time",
+    description:
+      "Professional draft beer dispense system design for taprooms, brewpubs, bars, and restaurants. Optimize pour quality, reduce waste, and protect the beer your team worked hard to brew.",
+    image: heroImages.dispense,
+    offerings: [
+      {
+        icon: Cog,
+        name: "System Design & Engineering",
+        description:
+          "Custom draft system design — direct draw, long draw, or remote dispense — tailored to your venue and beer styles.",
+      },
+      {
+        icon: Wrench,
+        name: "Equipment Selection",
+        description:
+          "Vendor-neutral specs for glycol chillers, towers, taps, regulators, FOB detectors, and gas blenders.",
+      },
+      {
+        icon: Gauge,
+        name: "Line Balancing & Calibration",
+        description:
+          "Precision balancing of line length, pressure, and temperature for foam-free, full-bodied pours.",
+      },
+      {
+        icon: Thermometer,
+        name: "Glycol Cooling Systems",
+        description:
+          "Long-draw and trunk-line cooling design that keeps beer at serving temperature from keg to tap.",
+      },
+      {
+        icon: Droplets,
+        name: "Sanitation Protocols",
+        description:
+          "Cleaning schedules, equipment, and chemistry that protect flavor and meet hygiene standards.",
+      },
+      {
+        icon: GraduationCap,
+        name: "Installation & Staff Training",
+        description:
+          "On-site commissioning and hands-on training for bar staff on operation, cleaning, and troubleshooting.",
+      },
+    ],
+    process: [
+      { step: "Site Assessment", description: "Evaluate layout, tap count, beer styles, and venue flow" },
+      { step: "System Design", description: "Engineer the system, equipment specs, and line routing" },
+      { step: "Installation", description: "Equipment install, line balancing, and commissioning" },
+      { step: "Training & Handover", description: "Staff training on operation, cleaning, and maintenance" },
+    ],
+    outcomes: [
+      "Perfect pour quality at every tap",
+      "30-50% reduction in beer waste",
+      "Consistent serving temperature",
+      "Lower long-term operating costs",
+      "Improved guest experience",
+      "Easier sanitation and maintenance",
     ],
   },
   {

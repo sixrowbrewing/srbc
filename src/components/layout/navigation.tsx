@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -8,6 +9,7 @@ import { Container } from "@/components/shared/container";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
+import logo from "@/assets/srbclogo.png";
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,17 +36,21 @@ export function Navigation() {
           : "bg-background/80 backdrop-blur-sm",
       )}
     >
-      <Container className="flex h-16 items-center justify-between md:h-20">
+      <Container className="flex h-20 items-center justify-between md:h-24">
         <Link
           href="/"
-          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md"
+          aria-label={`${siteConfig.name} — Home`}
+          className="flex items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
-          <span className="font-heading text-xl font-bold tracking-tight text-foreground md:text-2xl">
-            {siteConfig.shortName}
-          </span>
-          <span className="hidden text-xs font-medium text-muted-foreground sm:inline">
-            {siteConfig.name}
-          </span>
+          <Image
+            src={logo}
+            alt={siteConfig.name}
+            priority
+            placeholder="blur"
+            sizes="(min-width: 768px) 160px, 120px"
+            className="h-14 w-auto md:h-16"
+          />
+          <span className="sr-only">{siteConfig.shortName}</span>
         </Link>
 
         <nav aria-label="Primary" className="hidden md:block">

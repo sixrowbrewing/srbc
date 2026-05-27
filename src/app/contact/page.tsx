@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Contact SRBC | Brewery Consultant in Pune, India",
   description:
-    "Contact SRBC for microbrewery setup, brewpub consulting in Pune, Maharashtra. Call +91 8559907991 or email info@sixrowbrewing.com.",
+    "Contact SRBC for microbrewery setup, brewpub consulting in Pune, Maharashtra. Call +91 8559907991 or email sixrowbrewing@gmail.com.",
   path: "/contact",
   keywords: [
     "contact brewery consultant Pune",

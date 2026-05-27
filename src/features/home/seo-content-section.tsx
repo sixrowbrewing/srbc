@@ -7,7 +7,7 @@ export function SeoContentSection() {
   return (
     <Section tone="muted" ariaLabelledby="local-expertise-title">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-16">
           <article className="space-y-10 text-base leading-relaxed text-muted-foreground">
             <header>
               <h2
@@ -54,7 +54,7 @@ export function SeoContentSection() {
             </div>
           </article>
 
-          <aside className="space-y-6">
+          <aside className="space-y-6 lg:sticky lg:top-28">
             <div className="rounded-2xl border border-accent/20 bg-accent/5 p-8">
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
