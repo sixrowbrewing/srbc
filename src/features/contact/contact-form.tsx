@@ -32,19 +32,38 @@ export function ContactForm() {
     e.preventDefault();
     setError(null);
 
-    if (!form.name || !form.email || !form.message) {
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setError("Please fill in all fields.");
       return;
     }
 
     setStatus("submitting");
     try {
-      await new Promise((resolve) => setTimeout(resolve, 900));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+        }),
+      });
+
+      const data: { ok?: boolean; error?: string } = await response
+        .json()
+        .catch(() => ({}));
+
+      if (!response.ok || !data.ok) {
+        setStatus("error");
+        setError(data.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+
       setStatus("success");
       setForm(initial);
     } catch {
       setStatus("error");
-      setError("Something went wrong. Please try again.");
+      setError("Network error. Please try again.");
     }
   };
 

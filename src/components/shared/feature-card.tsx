@@ -6,23 +6,50 @@ interface FeatureCardProps {
   title: string;
   description: string;
   className?: string;
+  index?: number;
+  stat?: string;
 }
 
-export function FeatureCard({ icon: Icon, title, description, className }: FeatureCardProps) {
+export function FeatureCard({
+  icon: Icon,
+  title,
+  description,
+  className,
+  index,
+  stat,
+}: FeatureCardProps) {
+  const numbered = typeof index === "number";
   return (
     <article
       className={cn(
-        "group flex h-full flex-col gap-4 rounded-xl border border-border bg-card p-7 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md",
+        "group relative flex h-full flex-col gap-4 rounded-2xl border border-border/80 bg-card p-7 shadow-sm transition-all duration-300 ease-smooth hover:-translate-y-0.5 hover:border-primary/20 hover:shadow-md",
         className,
       )}
     >
-      <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-accent/10 text-accent">
-        <Icon className="h-5 w-5" aria-hidden />
-      </span>
-      <h3 className="font-heading text-lg font-semibold text-foreground">
+      <div className="flex items-center justify-between">
+        <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary-100 text-primary ring-1 ring-inset ring-primary/10">
+          <Icon className="h-5 w-5" aria-hidden />
+        </span>
+        {numbered && (
+          <span
+            aria-hidden
+            className="font-heading text-sm font-medium tabular-nums tracking-widest text-muted-foreground/70"
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        )}
+      </div>
+      <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">
         {title}
       </h3>
-      <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+      <p className="text-sm leading-relaxed text-muted-foreground">
+        {description}
+      </p>
+      {stat && (
+        <p className="mt-auto pt-4 text-sm font-semibold text-accent-hover">
+          {stat}
+        </p>
+      )}
     </article>
   );
 }

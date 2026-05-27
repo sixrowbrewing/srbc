@@ -3,95 +3,146 @@ import { Container } from "@/components/shared/container";
 import { Section } from "@/components/shared/section";
 import { longFormContent } from "@/content/home";
 
+const cities = [
+  "Pune",
+  "Mumbai",
+  "Bangalore",
+  "Delhi NCR",
+  "Hyderabad",
+  "Chennai",
+  "Goa",
+  "Kolkata",
+];
+
+const sectionAnchors = [
+  { id: "overview", label: "Overview" },
+  { id: "services", label: "Services" },
+  { id: "expertise", label: "Expertise" },
+  { id: "national", label: "National reach" },
+];
+
 export function SeoContentSection() {
   return (
-    <Section tone="muted" ariaLabelledby="local-expertise-title">
-      <Container>
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-16">
-          <article className="space-y-10 text-base leading-relaxed text-muted-foreground">
-            <header>
-              <h2
-                id="local-expertise-title"
-                className="font-heading text-display-lg font-semibold text-foreground"
-              >
-                {longFormContent.intro.title}
-              </h2>
-              <p className="mt-4 text-lg text-muted-foreground">
-                {longFormContent.intro.body}
+    <Section tone="muted" ariaLabelledby="local-expertise-title" size="md">
+      <Container size="wide">
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-16">
+          {/* Sticky TOC + local card */}
+          <aside className="space-y-8 lg:sticky lg:top-28">
+            <div>
+              <p className="inline-flex items-center text-caption font-semibold uppercase text-accent-hover">
+                <span
+                  aria-hidden
+                  className="mr-2.5 inline-block h-px w-7 bg-accent"
+                />
+                On this page
               </p>
-            </header>
-
-            <div>
-              <h3 className="font-heading text-2xl font-semibold text-foreground">
-                {longFormContent.servicesIntro.title}
-              </h3>
-              <p className="mt-3">{longFormContent.servicesIntro.body}</p>
-              <ul className="mt-5 space-y-3">
-                {longFormContent.servicesIntro.bullets.map((bullet) => (
-                  <li key={bullet.label} className="flex items-start gap-3">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden />
-                    <span className="text-foreground">
-                      <strong className="font-semibold">{bullet.label}</strong>
-                      <span className="text-muted-foreground"> — {bullet.detail}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <nav aria-label="Section contents" className="mt-5">
+                <ul className="space-y-2.5 border-l border-border">
+                  {sectionAnchors.map((anchor) => (
+                    <li key={anchor.id}>
+                      <a
+                        href={`#${anchor.id}`}
+                        className="-ml-px block border-l-2 border-transparent pl-4 text-sm font-medium text-muted-foreground transition-colors hover:border-accent hover:text-foreground"
+                      >
+                        {anchor.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
             </div>
 
-            <div>
-              <h3 className="font-heading text-2xl font-semibold text-foreground">
-                {longFormContent.expertise.title}
-              </h3>
-              <p className="mt-3">{longFormContent.expertise.body}</p>
-            </div>
-
-            <div>
-              <h3 className="font-heading text-2xl font-semibold text-foreground">
-                {longFormContent.national.title}
-              </h3>
-              <p className="mt-3">{longFormContent.national.body}</p>
-            </div>
-          </article>
-
-          <aside className="space-y-6 lg:sticky lg:top-28">
-            <div className="rounded-2xl border border-accent/20 bg-accent/5 p-8">
+            <div className="rounded-2xl border border-border bg-card p-7 shadow-sm">
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100 text-primary ring-1 ring-inset ring-primary/10">
                   <MapPin className="h-5 w-5" aria-hidden />
                 </span>
-                <h3 className="font-heading text-xl font-semibold text-foreground">
+                <h3 className="font-heading text-lg font-semibold text-foreground">
                   {longFormContent.local.title}
                 </h3>
               </div>
-              <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 {longFormContent.local.body}
               </p>
-            </div>
 
-            <div className="rounded-2xl border border-border bg-card p-8 shadow-sm">
-              <p className="font-heading text-sm font-semibold uppercase tracking-widest text-accent">
+              <p className="mt-6 text-caption font-semibold uppercase text-accent-hover">
                 Cities we serve
               </p>
-              <ul className="mt-4 grid grid-cols-2 gap-2 text-sm font-medium text-foreground">
-                {[
-                  "Pune",
-                  "Mumbai",
-                  "Bangalore",
-                  "Delhi NCR",
-                  "Hyderabad",
-                  "Chennai",
-                  "Goa",
-                  "Kolkata",
-                ].map((city) => (
-                  <li key={city} className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
+              <ul className="mt-3 flex flex-wrap gap-1.5">
+                {cities.map((city) => (
+                  <li
+                    key={city}
+                    className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground"
+                  >
                     {city}
                   </li>
                 ))}
               </ul>
             </div>
           </aside>
+
+          <article className="space-y-12 text-base leading-relaxed text-muted-foreground">
+            <header id="overview" className="scroll-mt-28">
+              <p className="inline-flex items-center text-caption font-semibold uppercase text-accent-hover">
+                <span
+                  aria-hidden
+                  className="mr-2.5 inline-block h-px w-7 bg-accent"
+                />
+                Local expertise
+              </p>
+              <h2
+                id="local-expertise-title"
+                className="mt-4 font-heading text-display-lg font-semibold tracking-tight text-foreground text-balance"
+              >
+                {longFormContent.intro.title}
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-muted-foreground text-pretty">
+                {longFormContent.intro.body}
+              </p>
+            </header>
+
+            <div id="services" className="scroll-mt-28">
+              <h3 className="font-heading text-display-md font-semibold tracking-tight text-foreground">
+                {longFormContent.servicesIntro.title}
+              </h3>
+              <p className="mt-3">{longFormContent.servicesIntro.body}</p>
+              <ul className="mt-6 space-y-3">
+                {longFormContent.servicesIntro.bullets.map((bullet) => (
+                  <li
+                    key={bullet.label}
+                    className="flex items-start gap-3 rounded-xl border border-border/60 bg-card p-4"
+                  >
+                    <CheckCircle2
+                      className="mt-0.5 h-5 w-5 shrink-0 text-accent-hover"
+                      aria-hidden
+                    />
+                    <span>
+                      <strong className="font-semibold text-foreground">
+                        {bullet.label}
+                      </strong>
+                      <span className="block text-sm text-muted-foreground">
+                        {bullet.detail}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div id="expertise" className="scroll-mt-28">
+              <h3 className="font-heading text-display-md font-semibold tracking-tight text-foreground">
+                {longFormContent.expertise.title}
+              </h3>
+              <p className="mt-3">{longFormContent.expertise.body}</p>
+            </div>
+
+            <div id="national" className="scroll-mt-28">
+              <h3 className="font-heading text-display-md font-semibold tracking-tight text-foreground">
+                {longFormContent.national.title}
+              </h3>
+              <p className="mt-3">{longFormContent.national.body}</p>
+            </div>
+          </article>
         </div>
       </Container>
     </Section>

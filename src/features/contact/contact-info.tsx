@@ -57,7 +57,7 @@ export function ContactInfo() {
         <p className="mt-2 text-sm text-primary-foreground/80">
           Call us for urgent consultations or reach us instantly on WhatsApp.
         </p>
-        <p className="mt-6 font-heading text-3xl font-bold text-accent-foreground">
+        <p className="mt-6 font-heading text-3xl font-bold text-accent">
           {siteConfig.contact.phone}
         </p>
         <a
