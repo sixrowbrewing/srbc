@@ -9,8 +9,11 @@ export const siteConfig = {
   url: "https://www.sixrowbrewing.com",
   ogImage: "/og.jpg",
   contact: {
-    phone: "+91 8559907991",
-    phoneRaw: "918559907991",
+    // Phone/WhatsApp intentionally commented out so the number is NOT shipped
+    // to the browser bundle or rendered in the UI. Replace the placeholder with
+    // the real number before re-enabling these (and the related UI + helper).
+    // phone: "+91 00000 00000",
+    // phoneRaw: "910000000000",
     email: "sixrowbrewing@gmail.com",
     address: {
       line1: "Six Row Brewing Consulting",
@@ -19,11 +22,11 @@ export const siteConfig = {
       country: "India",
     },
   },
-  whatsapp: {
-    number: "918559907991",
-    defaultMessage:
-      "Hello! I would like to know more about your brewing consulting services.",
-  },
+  // whatsapp: {
+  //   number: "910000000000",
+  //   defaultMessage:
+  //     "Hello! I would like to know more about your brewing consulting services.",
+  // },
   nav: [
     { label: "Services", href: "/services" },
     { label: "Blog", href: "/blog" },
