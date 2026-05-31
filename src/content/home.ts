@@ -1,4 +1,4 @@
-import { Award, MapPin, Sparkles, ShieldCheck } from "lucide-react";
+import { Factory, Gauge, Microscope, FlaskConical } from "lucide-react";
 import microbreweryImage from "@/assets/microbrewery.png";
 
 export const heroContent = {
@@ -11,11 +11,6 @@ export const heroContent = {
   primaryCta: { label: "Start your project", href: "/contact" },
   secondaryCta: { label: "Explore services", href: "/services" },
   image: microbreweryImage,
-  stats: [
-    { value: "15+", label: "Brewery projects delivered" },
-    { value: "10", label: "Consulting practices" },
-    { value: "PAN-India", label: "Pune · Mumbai · Bangalore · Delhi" },
-  ],
 };
 
 export const whyChooseContent = {
@@ -24,32 +19,32 @@ export const whyChooseContent = {
     "Expert brewing consultants specialising in microbreweries, brewpubs, and craft brewing operations across India. From startup guidance to operational excellence, we deliver results.",
   pillars: [
     {
-      icon: Award,
-      title: "15+ successful projects",
+      icon: Factory,
+      title: "Brewery Setup Expertise",
       description:
-        "Proven track record across microbreweries, brewpubs, and craft brewing operations.",
-      stat: "Delivered nationwide",
+        "Turnkey microbrewery and brewpub setup — from feasibility and layout to equipment selection and commissioning.",
+      stat: "Feasibility to first brew",
     },
     {
-      icon: MapPin,
-      title: "Local expertise",
+      icon: Gauge,
+      title: "Operational Excellence",
       description:
-        "Deep knowledge of Indian regulations, supply chains, and consumer preferences.",
-      stat: "Based in Pune, Maharashtra",
+        "Streamlined processes, yield optimization, and cost control that keep your brewery running efficiently every day.",
+      stat: "Efficient, day after day",
     },
     {
-      icon: Sparkles,
-      title: "Specialty categories",
+      icon: Microscope,
+      title: "Quality & Microbiology Systems",
       description:
-        "Pioneer in NA beers, probiotic beers, and emerging functional beverages.",
-      stat: "NA + functional beer expertise",
+        "Robust QA/QC and microbiology protocols that protect flavour, shelf life, and consistency in every batch.",
+      stat: "Consistent in every batch",
     },
     {
-      icon: ShieldCheck,
-      title: "End-to-end support",
+      icon: FlaskConical,
+      title: "Recipe Development & Innovation",
       description:
-        "From feasibility studies to commissioning to ongoing operational excellence.",
-      stat: "Concept → commissioning",
+        "Custom recipes and flavour profiles — including NA, probiotic, and functional brews — tailored to your brand.",
+      stat: "Signature, on-brand beers",
     },
   ],
 };

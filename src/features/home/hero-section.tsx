@@ -95,20 +95,6 @@ export function HeroSection() {
             </div>
           </div>
         </div>
-
-        {/* Stat band */}
-        <dl className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3 md:mt-20">
-          {heroContent.stats.map((stat) => (
-            <div key={stat.label} className="bg-card px-6 py-6 md:px-8 md:py-7">
-              <dt className="text-caption font-semibold uppercase text-muted-foreground">
-                {stat.label}
-              </dt>
-              <dd className="mt-2 font-heading text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-                {stat.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </Container>
     </section>
   );
