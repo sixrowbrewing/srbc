@@ -6,7 +6,7 @@ export const siteConfig = {
   tagline: "Crafting Success, Brewing Excellence",
   description:
     "Leading brewery consultant in Pune, India. Expert microbrewery setup, brewpub consulting, NA beer development, probiotic beer formulation.",
-  url: "https://sixrowbrewing.com",
+  url: "https://www.sixrowbrewing.com",
   ogImage: "/og.jpg",
   contact: {
     phone: "+91 8559907991",
@@ -26,6 +26,7 @@ export const siteConfig = {
   },
   nav: [
     { label: "Services", href: "/services" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ] as ReadonlyArray<NavItem>,
 };

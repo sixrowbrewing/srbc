@@ -10,3 +10,11 @@ export function whatsappLink(message?: string) {
   const text = message ?? siteConfig.whatsapp.defaultMessage;
   return `https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(text)}`;
 }
+
+export function formatDate(value: string) {
+  return new Date(value).toLocaleDateString("en-IN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}

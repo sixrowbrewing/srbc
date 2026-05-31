@@ -130,10 +130,24 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-primary-foreground/10 pt-6 text-sm text-primary-foreground/55 sm:flex-row sm:items-center">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-primary-foreground/10 pt-6 text-sm text-primary-foreground/55 sm:flex-row sm:items-center">
           <p>
             &copy; {year} {siteConfig.name}. All rights reserved.
           </p>
+          <nav aria-label="Footer" className="flex items-center gap-5">
+            <Link
+              href="/blog"
+              className="transition-colors hover:text-primary-foreground"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/contact"
+              className="transition-colors hover:text-primary-foreground"
+            >
+              Contact
+            </Link>
+          </nav>
           <p className="font-heading italic text-primary-foreground/65">
             {siteConfig.tagline}
           </p>

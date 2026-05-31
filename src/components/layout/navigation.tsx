@@ -150,6 +150,19 @@ export function Navigation() {
 
             <li>
               <Link
+                href="/blog"
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  pathname.startsWith("/blog")
+                    ? "text-primary"
+                    : "text-foreground/75 hover:text-primary",
+                )}
+              >
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/contact"
                 className={cn(
                   "text-sm font-medium transition-colors",
@@ -229,6 +242,14 @@ export function Navigation() {
                     </li>
                   </ul>
                 )}
+              </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="block rounded-md px-3 py-3 text-base font-medium text-foreground hover:bg-muted"
+                >
+                  Blog
+                </Link>
               </li>
               <li>
                 <Link

@@ -7,6 +7,9 @@ interface BuildMetadataInput {
   path?: string;
   keywords?: string[];
   image?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  noindex?: boolean;
 }
 
 export function buildMetadata({
@@ -15,6 +18,9 @@ export function buildMetadata({
   path = "/",
   keywords,
   image,
+  type = "website",
+  publishedTime,
+  noindex = false,
 }: BuildMetadataInput): Metadata {
   const url = new URL(path, siteConfig.url).toString();
   const ogImage = image ?? siteConfig.ogImage;
@@ -24,13 +30,15 @@ export function buildMetadata({
     description,
     keywords,
     alternates: { canonical: url },
+    ...(noindex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
-      type: "website",
+      type,
       locale: "en_IN",
       url,
       siteName: siteConfig.name,
       title,
       description,
+      ...(type === "article" && publishedTime ? { publishedTime } : {}),
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -63,6 +71,39 @@ export function organizationJsonLd() {
       name: "India",
     },
     sameAs: [],
+  };
+}
+
+export function blogPostingJsonLd(input: {
+  title: string;
+  description?: string;
+  slug: string;
+  image?: string;
+  publishedAt: string;
+  authorName?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: input.title,
+    description: input.description,
+    image: input.image ? [input.image] : undefined,
+    datePublished: input.publishedAt,
+    dateModified: input.publishedAt,
+    url: new URL(`/blog/${input.slug}`, siteConfig.url).toString(),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": new URL(`/blog/${input.slug}`, siteConfig.url).toString(),
+    },
+    author: {
+      "@type": "Person",
+      name: input.authorName ?? siteConfig.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
   };
 }
 
