@@ -7,7 +7,10 @@ const postFields = groq`
   "slug": slug.current,
   excerpt,
   publishedAt,
-  coverImage,
+  coverImage{
+    ...,
+    "lqip": asset->metadata.lqip
+  },
   "author": author->{name, image},
   "categories": categories[]->{title, "slug": slug.current}
 `;

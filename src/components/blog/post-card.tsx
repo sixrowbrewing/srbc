@@ -9,7 +9,7 @@ export function PostCard({ post }: { post: PostListItem }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group relative block overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm transition-all duration-300 ease-smooth hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm transition-all duration-300 ease-smooth hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       aria-label={`Read: ${post.title}`}
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-primary-100">
@@ -18,10 +18,12 @@ export function PostCard({ post }: { post: PostListItem }) {
           alt={post.coverImage?.alt ?? ""}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          placeholder={post.coverImage?.lqip ? "blur" : "empty"}
+          blurDataURL={post.coverImage?.lqip}
           className="object-cover transition-transform duration-700 ease-smooth group-hover:scale-[1.04]"
         />
       </div>
-      <div className="flex flex-col gap-3 p-6">
+      <div className="flex flex-1 flex-col gap-3 p-6">
         <time
           dateTime={post.publishedAt}
           className="text-caption font-semibold uppercase tracking-widest text-accent-hover"
@@ -36,7 +38,7 @@ export function PostCard({ post }: { post: PostListItem }) {
             {post.excerpt}
           </p>
         ) : null}
-        <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-accent-hover">
+        <span className="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-semibold text-accent-hover">
           Read article
           <ArrowUpRight
             className="h-4 w-4 transition-transform duration-300 ease-smooth group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

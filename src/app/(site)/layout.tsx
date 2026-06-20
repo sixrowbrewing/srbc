@@ -1,3 +1,5 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { Navigation } from "@/components/layout/navigation";
 import { Footer } from "@/components/layout/footer";
 // import { WhatsAppButton } from "@/components/layout/whatsapp-button";
@@ -26,6 +28,8 @@ export default function SiteLayout({
           __html: JSON.stringify(organizationJsonLd()),
         }}
       />
+      <Analytics />
+      <SpeedInsights />
     </>
   );
 }

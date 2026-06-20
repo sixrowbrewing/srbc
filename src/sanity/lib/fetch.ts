@@ -23,7 +23,9 @@ export async function sanityFetch<QueryResponse>({
     next: {
       // Time-based fallback so content refreshes even without a webhook
       // (e.g. during local development before the webhook is wired up).
-      revalidate: 60,
+      // Kept long because /api/revalidate purges by tag on publish, so a short
+      // window only adds slow origin round-trips (TTFB) without freshness gain.
+      revalidate: 3600,
       tags,
     },
   });

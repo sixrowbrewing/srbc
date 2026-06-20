@@ -3,6 +3,8 @@ import type { Image } from "sanity";
 
 export interface ImageWithAlt extends Image {
   alt?: string;
+  /** Low-quality image placeholder (base64) from Sanity asset metadata. */
+  lqip?: string;
 }
 
 export interface AuthorRef {

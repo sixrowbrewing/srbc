@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/shared/container";
 import { CtaSection } from "@/components/shared/cta-section";
 import { PageHero } from "@/features/services/page-hero";
-import { PostCard } from "@/components/blog/post-card";
+import { BlogSearchList } from "@/components/blog/blog-search-list";
 import { buildMetadata } from "@/lib/seo";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { postsQuery } from "@/sanity/lib/queries";
@@ -24,6 +24,9 @@ export const metadata: Metadata = buildMetadata({
   ],
 });
 
+// Statically rendered; refreshed on publish via /api/revalidate (tag "post").
+export const revalidate = 3600;
+
 export default async function BlogPage() {
   const posts = await sanityFetch<PostListItem[]>({
     query: postsQuery,
@@ -44,13 +47,7 @@ export default async function BlogPage() {
               No posts published yet. Check back soon.
             </p>
           ) : (
-            <ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) => (
-                <li key={post._id}>
-                  <PostCard post={post} />
-                </li>
-              ))}
-            </ul>
+            <BlogSearchList posts={posts} />
           )}
         </Container>
       </section>

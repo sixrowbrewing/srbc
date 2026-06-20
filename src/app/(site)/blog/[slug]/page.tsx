@@ -17,6 +17,10 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+// Statically rendered; refreshed on publish via /api/revalidate (tag "post").
+// The hourly fallback keeps content fresh without frequent slow origin fetches.
+export const revalidate = 3600;
+
 export async function generateStaticParams() {
   const slugs = await sanityFetch<PostSlug[]>({
     query: postSlugsQuery,
@@ -122,7 +126,9 @@ export default async function PostPage({ params }: PageProps) {
               alt={post.coverImage?.alt ?? post.title}
               fill
               priority
-              sizes="(min-width: 768px) 768px, 100vw"
+              sizes="(min-width: 896px) 832px, 100vw"
+              placeholder={post.coverImage?.lqip ? "blur" : "empty"}
+              blurDataURL={post.coverImage?.lqip}
               className="object-cover"
             />
           </div>
