@@ -30,7 +30,8 @@ export const revalidate = 3600;
 export default async function BlogPage() {
   const posts = await sanityFetch<PostListItem[]>({
     query: postsQuery,
-    tags: ["post"],
+    // "category" so renaming/editing a category also revalidates this page.
+    tags: ["post", "category"],
   });
 
   return (

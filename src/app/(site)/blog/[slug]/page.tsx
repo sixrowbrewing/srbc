@@ -33,7 +33,8 @@ async function getPost(slug: string) {
   return sanityFetch<Post | null>({
     query: postBySlugQuery,
     params: { slug },
-    tags: ["post"],
+    // "category" so editing a category also revalidates the post page.
+    tags: ["post", "category"],
   });
 }
 
