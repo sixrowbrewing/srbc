@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { CtaSection } from "@/components/shared/cta-section";
 import { PortableText } from "@/components/blog/portable-text";
+import { ImageZoom } from "@/components/blog/image-zoom";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { ArticleCtaCard } from "@/components/blog/article-cta-card";
 import { buildMetadata, blogPostingJsonLd } from "@/lib/seo";
@@ -15,7 +16,7 @@ import { siteConfig } from "@/lib/site";
 import logo from "@/assets/srbclogo.png";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { postBySlugQuery, postSlugsQuery } from "@/sanity/lib/queries";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor, getImageDimensions } from "@/sanity/lib/image";
 import type { Post, PostSlug } from "@/sanity/lib/types";
 
 interface PageProps {
@@ -80,9 +81,25 @@ export default async function PostPage({ params }: PageProps) {
 
   if (!post) notFound();
 
+  // Rendered at the image's own aspect ratio — cover images are often
+  // infographics, and a forced crop cuts off their headings and footers.
+  const heroDimensions = getImageDimensions(post.coverImage);
   const heroImage = urlFor(post.coverImage)
     .width(1600)
-    .height(900)
+    .fit("max")
+    .auto("format")
+    .url();
+  // Larger source for the click-to-expand overlay, capped so a huge original
+  // isn't served verbatim. Only fetched once the overlay opens.
+  const heroFullImage = urlFor(post.coverImage)
+    .width(3000)
+    .fit("max")
+    .auto("format")
+    .url();
+  // Social cards need a fixed 1.91:1, so this one stays cropped.
+  const shareImage = urlFor(post.coverImage)
+    .width(1200)
+    .height(630)
     .fit("crop")
     .auto("format")
     .url();
@@ -90,7 +107,7 @@ export default async function PostPage({ params }: PageProps) {
     title: post.title,
     description: post.excerpt,
     slug: post.slug,
-    image: heroImage,
+    image: shareImage,
     publishedAt: post.publishedAt,
     authorName: post.author?.name,
   });
@@ -174,17 +191,40 @@ export default async function PostPage({ params }: PageProps) {
                 ) : null}
               </header>
 
-              <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl bg-primary-100">
-                <Image
-                  src={heroImage}
-                  alt={post.coverImage?.alt ?? post.title}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 800px, 100vw"
-                  placeholder={post.coverImage?.lqip ? "blur" : "empty"}
-                  blurDataURL={post.coverImage?.lqip}
-                  className="object-cover"
-                />
+              <div className="mt-10">
+                {heroDimensions ? (
+                  <ImageZoom
+                    src={heroFullImage}
+                    alt={post.coverImage?.alt ?? post.title}
+                    width={heroDimensions.width}
+                    height={heroDimensions.height}
+                  >
+                    <Image
+                      src={heroImage}
+                      alt={post.coverImage?.alt ?? post.title}
+                      width={heroDimensions.width}
+                      height={heroDimensions.height}
+                      priority
+                      sizes="(min-width: 1024px) 800px, 100vw"
+                      placeholder={post.coverImage?.lqip ? "blur" : "empty"}
+                      blurDataURL={post.coverImage?.lqip}
+                      className="h-auto w-full rounded-2xl bg-primary-100"
+                    />
+                  </ImageZoom>
+                ) : (
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-primary-100">
+                    <Image
+                      src={heroImage}
+                      alt={post.coverImage?.alt ?? post.title}
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 800px, 100vw"
+                      placeholder={post.coverImage?.lqip ? "blur" : "empty"}
+                      blurDataURL={post.coverImage?.lqip}
+                      className="object-cover"
+                    />
+                  </div>
+                )}
               </div>
 
               {post.body ? (

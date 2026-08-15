@@ -5,7 +5,8 @@ import {
 } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor, getImageDimensions } from "@/sanity/lib/image";
+import { ImageZoom } from "@/components/blog/image-zoom";
 import type { ImageWithAlt } from "@/sanity/lib/types";
 
 const components: PortableTextComponents = {
@@ -76,16 +77,31 @@ const components: PortableTextComponents = {
   types: {
     image: ({ value }: { value: ImageWithAlt & { caption?: string } }) => {
       if (!value?.asset) return null;
+
+      // Fall back to a 3:2 box only when the ref carries no dimensions.
+      const { width, height } = getImageDimensions(value) ?? {
+        width: 1200,
+        height: 800,
+      };
+      const alt = value.alt ?? value.caption ?? "";
+
       return (
         <figure className="mt-8">
-          <Image
-            src={urlFor(value).width(1200).fit("max").auto("format").url()}
-            alt={value.alt ?? ""}
-            width={1200}
-            height={800}
-            className="rounded-xl"
-            sizes="(min-width: 768px) 768px, 100vw"
-          />
+          <ImageZoom
+            src={urlFor(value).width(3000).fit("max").auto("format").url()}
+            alt={alt}
+            width={width}
+            height={height}
+          >
+            <Image
+              src={urlFor(value).width(1200).fit("max").auto("format").url()}
+              alt={alt}
+              width={width}
+              height={height}
+              className="h-auto w-full rounded-xl"
+              sizes="(min-width: 768px) 768px, 100vw"
+            />
+          </ImageZoom>
           {value.caption ? (
             <figcaption className="mt-2 text-center text-sm text-muted-foreground">
               {value.caption}

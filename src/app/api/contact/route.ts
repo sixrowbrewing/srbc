@@ -1,14 +1,9 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { siteConfig } from "@/lib/site";
+import { validateContact } from "@/lib/validation";
 
 export const runtime = "nodejs";
-
-const MAX_NAME = 120;
-const MAX_EMAIL = 254;
-const MAX_MESSAGE = 5000;
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function escapeHtml(input: string): string {
   return input
@@ -50,12 +45,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, message } = payload as Record<string, unknown>;
+  const { name, email, phone, message } = payload as Record<string, unknown>;
 
   if (
     typeof name !== "string" ||
     typeof email !== "string" ||
-    typeof message !== "string"
+    typeof message !== "string" ||
+    (phone !== undefined && typeof phone !== "string")
   ) {
     return NextResponse.json(
       { ok: false, error: "All fields are required." },
@@ -65,33 +61,26 @@ export async function POST(request: Request) {
 
   const trimmedName = name.trim();
   const trimmedEmail = email.trim();
+  const trimmedPhone = typeof phone === "string" ? phone.trim() : "";
   const trimmedMessage = message.trim();
 
-  if (
-    trimmedName.length === 0 ||
-    trimmedName.length > MAX_NAME ||
-    trimmedEmail.length === 0 ||
-    trimmedEmail.length > MAX_EMAIL ||
-    trimmedMessage.length === 0 ||
-    trimmedMessage.length > MAX_MESSAGE
-  ) {
-    return NextResponse.json(
-      { ok: false, error: "Please check the form values and try again." },
-      { status: 400 },
-    );
-  }
+  const errors = validateContact({
+    name: trimmedName,
+    email: trimmedEmail,
+    phone: trimmedPhone,
+    message: trimmedMessage,
+  });
 
-  if (!EMAIL_RE.test(trimmedEmail)) {
-    return NextResponse.json(
-      { ok: false, error: "Please provide a valid email address." },
-      { status: 400 },
-    );
+  const firstError = Object.values(errors)[0];
+  if (firstError) {
+    return NextResponse.json({ ok: false, error: firstError }, { status: 400 });
   }
 
   const resend = new Resend(apiKey);
 
   const safeName = escapeHtml(trimmedName);
   const safeEmail = escapeHtml(trimmedEmail);
+  const safePhone = escapeHtml(trimmedPhone);
   const safeMessageHtml = escapeHtml(trimmedMessage).replace(/\n/g, "<br>");
 
   const subject = `New inquiry — ${trimmedName}`;
@@ -100,6 +89,7 @@ export async function POST(request: Request) {
     "",
     `Name:    ${trimmedName}`,
     `Email:   ${trimmedEmail}`,
+    `Phone:   ${trimmedPhone || "—"}`,
     "",
     "Message:",
     trimmedMessage,
@@ -121,6 +111,16 @@ export async function POST(request: Request) {
             <a href="mailto:${safeEmail}" style="color:#1F3A2E">${safeEmail}</a>
           </td>
         </tr>
+        ${
+          safePhone
+            ? `<tr>
+          <td style="padding:4px 16px 4px 0;color:#6b7280">Phone</td>
+          <td style="padding:4px 0">
+            <a href="tel:${safePhone}" style="color:#1F3A2E">${safePhone}</a>
+          </td>
+        </tr>`
+            : ""
+        }
       </table>
       <div style="border-top:1px solid #e3e5e1;padding-top:16px">
         <p style="margin:0 0 8px;color:#6b7280;font-size:13px">Message</p>

@@ -75,7 +75,16 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
-      <body className="bg-background font-sans text-foreground">
+      {/*
+        suppressHydrationWarning: extensions (ColorZilla, Grammarly, password
+        managers) inject attributes onto <body> before React hydrates, which
+        otherwise logs a hydration mismatch. Applies to this element's
+        attributes only — mismatches in the tree below are still reported.
+      */}
+      <body
+        className="bg-background font-sans text-foreground"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
