@@ -45,12 +45,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, email, phone, message } = payload as Record<string, unknown>;
+  const { name, email, phone, location, message } = payload as Record<string, unknown>;
 
   if (
     typeof name !== "string" ||
     typeof email !== "string" ||
     typeof message !== "string" ||
+    typeof location !== "string" ||
     (phone !== undefined && typeof phone !== "string")
   ) {
     return NextResponse.json(
@@ -62,12 +63,14 @@ export async function POST(request: Request) {
   const trimmedName = name.trim();
   const trimmedEmail = email.trim();
   const trimmedPhone = typeof phone === "string" ? phone.trim() : "";
+  const trimmedLocation = location.trim();
   const trimmedMessage = message.trim();
 
   const errors = validateContact({
     name: trimmedName,
     email: trimmedEmail,
     phone: trimmedPhone,
+    location: trimmedLocation,
     message: trimmedMessage,
   });
 
@@ -81,6 +84,7 @@ export async function POST(request: Request) {
   const safeName = escapeHtml(trimmedName);
   const safeEmail = escapeHtml(trimmedEmail);
   const safePhone = escapeHtml(trimmedPhone);
+  const safeLocation = escapeHtml(trimmedLocation);
   const safeMessageHtml = escapeHtml(trimmedMessage).replace(/\n/g, "<br>");
 
   const subject = `New inquiry — ${trimmedName}`;
@@ -90,6 +94,7 @@ export async function POST(request: Request) {
     `Name:    ${trimmedName}`,
     `Email:   ${trimmedEmail}`,
     `Phone:   ${trimmedPhone || "—"}`,
+    `Location: ${trimmedLocation}`,
     "",
     "Message:",
     trimmedMessage,
@@ -121,6 +126,10 @@ export async function POST(request: Request) {
         </tr>`
             : ""
         }
+        <tr>
+          <td style="padding:4px 16px 4px 0;color:#6b7280">Location</td>
+          <td style="padding:4px 0">${safeLocation}</td>
+        </tr>
       </table>
       <div style="border-top:1px solid #e3e5e1;padding-top:16px">
         <p style="margin:0 0 8px;color:#6b7280;font-size:13px">Message</p>

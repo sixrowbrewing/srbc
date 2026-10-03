@@ -6,6 +6,7 @@
 export const MAX_NAME = 120;
 export const MAX_EMAIL = 254;
 export const MAX_PHONE = 32;
+export const MAX_LOCATION = 120;
 export const MAX_MESSAGE = 5000;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -15,6 +16,7 @@ export interface ContactFields {
   name: string;
   email: string;
   phone: string;
+  location: string;
   message: string;
 }
 
@@ -41,6 +43,12 @@ export function validateField(field: ContactField, value: string): string | null
       if (value.length === 0) return null; // optional
       if (value.length > MAX_PHONE || !PHONE_RE.test(value))
         return "Please enter a valid contact number.";
+      return null;
+
+    case "location":
+      if (value.length === 0) return "Please enter where you plan to be based.";
+      if (value.length > MAX_LOCATION)
+        return `Location must be ${MAX_LOCATION} characters or fewer.`;
       return null;
 
     case "message":

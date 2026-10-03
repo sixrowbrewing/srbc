@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Fraunces } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/lib/site";
 import logo from "@/assets/favicon.png";
 import "./globals.css";
@@ -86,6 +87,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

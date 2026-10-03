@@ -26,8 +26,8 @@ export default function ContactPage() {
         description="Send us a message and we typically respond within one business day."
       />
       <section className="py-16 md:py-24" aria-label="Contact options">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+        <Container size="wide">
+          <div className="grid gap-10 lg:grid-cols-[1.7fr_1fr] xl:gap-14">
             <ContactForm />
             <ContactInfo />
           </div>
