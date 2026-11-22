@@ -417,38 +417,38 @@ export const services: ServiceDetail[] = [
     shortTitle: "Microbrewery & Brewpub",
     tagline: "Your Partner in Craft Brewing Success",
     description:
-      "Specialized consulting for microbreweries and brewpubs from concept to operation.",
+      "Microbrewery and brewpub setup consulting in India, covering feasibility, equipment selection, utility planning, recipes, commissioning and staff training.",
     image: heroImages.microbrewery,
     offerings: [
       {
         icon: Rocket,
         name: "Startup Consulting",
-        description: "Complete launch guidance including licensing and planning.",
+        description: "Feasibility and project reports covering capacity, CAPEX, OPEX, staffing and production assumptions.",
       },
       {
         icon: Building2,
         name: "Brewpub Design",
-        description: "Integrated brewery and restaurant design.",
+        description: "Plan brewhouse, fermentation, cold storage and keg handling layouts around the venue and production requirements.",
       },
       {
         icon: FileText,
         name: "Licensing Support",
-        description: "Navigate alcohol licensing and regulations.",
+        description: "Identify state-specific approval requirements and coordinate technical inputs with your licensing advisers.",
       },
       {
         icon: FlaskConical,
         name: "Recipe Portfolio",
-        description: "Craft unique beers defining your brand.",
+        description: "Develop a beer portfolio with malt and hop specifications, yeast selection, fermentation schedules and quality targets.",
       },
       {
         icon: GraduationCap,
         name: "Operations Training",
-        description: "Hands-on staff training and SOPs.",
+        description: "Train staff in brewing, cleaning, yeast handling, quality checks and documented operating procedures.",
       },
       {
         icon: Briefcase,
         name: "Business Optimization",
-        description: "Revenue optimization and profitability strategies.",
+        description: "Review tank utilisation, batch costs, beer recovery and production scheduling against your sales plan.",
       },
     ],
     process: [
@@ -461,8 +461,8 @@ export const services: ServiceDetail[] = [
       "Faster time to market",
       "Optimized investment",
       "Strong brand presence",
-      "Profitability within 12 months",
-      "Award-winning beers",
+      "Financial projections with stated assumptions",
+      "Documented recipes and quality targets",
       "Sustainable model",
     ],
   },
