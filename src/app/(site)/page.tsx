@@ -8,9 +8,9 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
   title:
-    "Six Row Brewing Consulting | Best Microbrewery Consultant in Pune, India",
+    "Brewery Consultants in India & Microbrewery Setup in Pune",
   description:
-    "Leading brewery consultant in Pune, India. Expert microbrewery setup, brewpub consulting, NA beer development, probiotic beer formulation. 15+ successful projects.",
+    "Pune-based brewery consultants serving India. Plan your microbrewery, develop beer recipes, design draught systems and improve brewery operations.",
   path: "/",
   keywords: [
     "microbrewery consultant Pune",

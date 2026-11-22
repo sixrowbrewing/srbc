@@ -8,14 +8,13 @@ import type { PostSlug } from "@/sanity/lib/types";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const base: MetadataRoute.Sitemap = [
-    { url: `${siteConfig.url}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${siteConfig.url}/services`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${siteConfig.url}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${siteConfig.url}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${siteConfig.url}/`, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteConfig.url}/services`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteConfig.url}/blog`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${siteConfig.url}/contact`, changeFrequency: "monthly", priority: 0.7 },
   ];
   const serviceUrls: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${siteConfig.url}/services/${service.slug}`,
-    lastModified: now,
     changeFrequency: "monthly",
     priority: 0.8,
   }));

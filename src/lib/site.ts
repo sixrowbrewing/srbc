@@ -5,7 +5,7 @@ export const siteConfig = {
   shortName: "SRBC",
   tagline: "Crafting Success, Brewing Excellence",
   description:
-    "Leading brewery consultant in Pune, India. Expert microbrewery setup, brewpub consulting, NA beer development, probiotic beer formulation.",
+    "Pune-based brewery consultants serving India with microbrewery planning, recipe development, draught system design and quality systems.",
   url: "https://www.sixrowbrewing.com",
   ogImage: "/og.jpg",
   contact: {
