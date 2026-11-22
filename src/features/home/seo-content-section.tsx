@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CheckCircle2, MapPin } from "lucide-react";
 import { Container } from "@/components/shared/container";
 import { Section } from "@/components/shared/section";
@@ -117,9 +118,9 @@ export function SeoContentSection() {
                       aria-hidden
                     />
                     <span>
-                      <strong className="font-semibold text-foreground">
+                      <Link href={bullet.href} className="font-semibold text-foreground underline underline-offset-4 hover:text-primary">
                         {bullet.label}
-                      </strong>
+                      </Link>
                       <span className="block text-sm text-muted-foreground">
                         {bullet.detail}
                       </span>
