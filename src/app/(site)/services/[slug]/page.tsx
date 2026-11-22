@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Container } from "@/components/shared/container";
+import { buttonVariants } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 import { CtaSection } from "@/components/shared/cta-section";
 import { ServiceHero } from "@/features/service-detail/service-hero";
@@ -45,6 +48,31 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         offerings={service.offerings}
         heading={isAudit ? "What we audit" : "What we offer"}
       />
+      {service.slug === "microbrewery" && (
+        <section id="project-report" aria-labelledby="project-report-title" className="scroll-mt-28 bg-muted py-12 md:py-16">
+          <Container>
+            <h2 id="project-report-title" className="font-heading text-display-md font-semibold">
+              Brewery Project Report &amp; Feasibility Study
+            </h2>
+            <p className="mt-4 max-w-3xl text-muted-foreground">
+              Estimate what it takes to set up and operate your brewery before committing to equipment or a site.
+              The report uses your target output, sales model, and available space to estimate capacity, investment, and running costs.
+            </p>
+            <ul className="mt-5 list-disc space-y-2 pl-5 text-muted-foreground">
+              <li><strong>Capacity:</strong> brewhouse size, tank count, batch schedule, and expected monthly output.</li>
+              <li><strong>Capital costs:</strong> brewing and cellar equipment, utility systems, and installation allowances.</li>
+              <li><strong>Operating costs:</strong> ingredients, utilities, staffing, and other recurring costs.</li>
+              <li><strong>Site requirements:</strong> layout inputs, water and power needs, cooling, and wastewater planning.</li>
+            </ul>
+            <p className="mt-5 max-w-3xl text-muted-foreground">
+              To get started, share your project location, planned litres per day or month, site status, and sales model.
+            </p>
+            <Link href="/contact" className={buttonVariants({ variant: "accent", className: "mt-6" })}>
+              Request a Brewery Project Report
+            </Link>
+          </Container>
+        </section>
+      )}
       {isAudit ? (
         <>
           <AuditProcessSection steps={service.process} />
