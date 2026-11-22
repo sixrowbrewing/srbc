@@ -19,6 +19,19 @@ import { postBySlugQuery, postSlugsQuery } from "@/sanity/lib/queries";
 import { urlFor, getImageDimensions } from "@/sanity/lib/image";
 import type { Post, PostSlug } from "@/sanity/lib/types";
 
+const consultingLinks: Record<string, { href: string; label: string; description: string }> = {
+  "how-much-does-it-cost-to-start-a-microbrewery-in-india-2026-guide-introduction": {
+    href: "/services/microbrewery#project-report",
+    label: "Request a Brewery Project Report",
+    description: "Get a project estimate based on your planned brewing capacity, site, equipment, utilities, and staffing.",
+  },
+  "contract-brewing-in-india-a-smarter-alternative-to-starting-a-microbrewery": {
+    href: "/services/gypsy",
+    label: "Explore Contract Brewing Consulting",
+    description: "Get help finding a host brewery and planning production, recipe transfer, and quality checks.",
+  },
+};
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -80,6 +93,8 @@ export default async function PostPage({ params }: PageProps) {
   const post = await getPost(slug);
 
   if (!post) notFound();
+
+  const consultingLink = consultingLinks[post.slug];
 
   // Rendered at the image's own aspect ratio — cover images are often
   // infographics, and a forced crop cuts off their headings and footers.
@@ -227,6 +242,14 @@ export default async function PostPage({ params }: PageProps) {
                 )}
               </div>
 
+              {consultingLink && (
+                <div className="mt-6 rounded-xl border border-border bg-muted p-5">
+                  <p className="text-sm text-muted-foreground">{consultingLink.description}</p>
+                  <Link href={consultingLink.href} className="mt-2 inline-block font-semibold text-primary underline underline-offset-4">
+                    {consultingLink.label}
+                  </Link>
+                </div>
+              )}
               {post.body ? (
                 <div className="mt-4">
                   <PortableText value={post.body} />
