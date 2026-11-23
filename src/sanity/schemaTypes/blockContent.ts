@@ -10,6 +10,19 @@ export const blockContentType = defineType({
   type: "array",
   of: [
     defineArrayMember({
+      name: "breweryRoi",
+      title: "Brewery ROI Calculator",
+      type: "object",
+      fields: [{
+        name: "initialSales",
+        title: "Starting monthly sales (litres)",
+        type: "number",
+        initialValue: 25000,
+        validation: (rule) => rule.required().integer().min(0).max(36000),
+      }],
+      preview: { prepare: () => ({ title: "Brewery ROI Calculator" }) },
+    }),
+    defineArrayMember({
       type: "block",
       styles: [
         { title: "Normal", value: "normal" },
