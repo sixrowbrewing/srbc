@@ -3,6 +3,7 @@ import {
   type PortableTextComponents,
   type PortableTextBlock,
 } from "@portabletext/react";
+import { BreweryRoi } from "@/components/blog/brewery-roi";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor, getImageDimensions } from "@/sanity/lib/image";
@@ -75,6 +76,7 @@ const components: PortableTextComponents = {
     },
   },
   types: {
+    breweryRoi: ({ value }) => <BreweryRoi initialSales={value.initialSales} />,
     image: ({ value }: { value: ImageWithAlt & { caption?: string } }) => {
       if (!value?.asset) return null;
 
