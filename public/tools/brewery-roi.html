@@ -5,11 +5,11 @@
 [hidden]{display:none!important}form{border-top:1px solid #b8c5b6;margin:16px 0;padding:14px 0}form label{display:block;margin:8px 0}form input[type=email],form input[type=tel]{width:100%;max-width:360px;display:block;padding:8px;font:inherit}button{font:inherit;background:#21513a;color:white;border:0;border-radius:6px;padding:10px 16px}button:disabled{opacity:.6}
 </style></head><body><main><h1>Brewery ROI calculator</h1>
 <label class="volume" for="slider">Expected monthly sales · <output id="volume">25,000 L</output></label>
-<div class="rail"><input type="range" min="0" max="36000" step="1" value="25000" id="slider"><span class="tick" id="tick" aria-hidden="true"></span></div>
+<div class="rail"><input type="range" min="0" max="75000" step="1" value="25000" id="slider"><span class="tick" id="tick" aria-hidden="true"></span></div>
 <p id="threshold"></p><p id="gap" aria-live="polite"></p><div hidden id="results" class="metrics" aria-live="polite">
 <div class="metric"><span id="status">Monthly surplus</span><strong id="surplus"></strong></div><div class="metric">Annual operating return<strong id="return"></strong></div><div class="metric">Simple payback<strong id="payback"></strong></div></div>
 <details><summary>Edit sales and brewery assumptions</summary><div class="fields">
-<label>Sales (L/month)<input id="sales" type="number" value="25000" min="0" max="36000" required></label>
+<label>Sales (L/month)<input id="sales" type="number" value="25000" min="0" max="75000" required></label>
 <label>Investment (₹ crore)<input id="investment" type="number" value="2" min="0.000001" step="any" required></label>
 <label>Fixed costs (₹ lakh/month)<input id="fixed" type="number" value="16" min="0" step="any" required></label>
 <label>Net selling price (₹/L)<input id="price" type="number" value="200" min="0" step="any" required></label>
@@ -26,14 +26,14 @@ const set=(id,value)=>{get(id).textContent=value};
 const fmt=value=>value.toLocaleString('en-IN',{maximumFractionDigits:2});
 const slider=get('slider'),sales=get('sales');
 const preset=new URLSearchParams(location.search).get('sales');
-if(preset && /^\d+$/.test(preset) && Number(preset)<=36000) sales.value=preset;
+if(preset && /^\d+$/.test(preset) && Number(preset)<=75000) sales.value=preset;
 function update(event){
   if(event?.target===slider) sales.value=slider.value;
   const valid=[...document.querySelectorAll('input[type=number]')].every(field=>field.validity.valid);
   if(!valid){
     for(const id of ['volume','surplus','return','payback']) set(id,'—');
     set('gap','');
-    set('threshold','Enter sales between 0 and 36,000 L, a positive investment, and valid non-negative prices and costs.');
+    set('threshold','Enter sales between 0 and 75,000 L, a positive investment, and valid non-negative prices and costs.');
     get('tick').hidden=true;return;
   }
   const units=sales.valueAsNumber,margin=get('price').valueAsNumber-get('cost').valueAsNumber;
@@ -50,8 +50,8 @@ function update(event){
       'Your expected sales are '+fmt(Math.abs(gap))+' L/month '+(gap>0?'above':'below')+' break-even.';
   }
   set('gap',comparison);
-  const tick=get('tick');tick.hidden=target===null || target>36000;
-  if(!tick.hidden) tick.style.left='calc(8px + (100% - 16px) * '+target/36000+')';
+  const tick=get('tick');tick.hidden=target===null || target>75000;
+  if(!tick.hidden) tick.style.left='calc(8px + (100% - 16px) * '+target/75000+')';
   set('status',surplus<0?'Monthly loss':surplus===0?'Monthly balance':'Monthly surplus');
   const magnitude=Math.abs(surplus);
   set('surplus',magnitude>=100000?'₹'+fmt(magnitude/100000)+' lakh':'₹'+fmt(magnitude));
