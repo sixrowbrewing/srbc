@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     || typeof callback !== "boolean" || (callback && (typeof phone !== "string" || !/^\+?[\d ()-]{7,24}$/.test(phone) || !/^\d{7,15}$/.test(phone.replace(/\D/g, ""))))
     || typeof requestId !== "string" || !/^[a-f0-9-]{36}$/i.test(requestId)
     || ![sales, investment, fixed, price, cost].every(v => Number.isFinite(v) && v >= 0 && v <= Number.MAX_SAFE_INTEGER)
-    || !Number.isInteger(sales) || sales > 36000 || investment <= 0) return invalid();
+    || !Number.isInteger(sales) || sales > 75000 || investment <= 0) return invalid();
   const key = process.env.RESEND_API_KEY, from = process.env.CONTACT_FROM_EMAIL;
   if (!key || !from) return unavailable();
   const contribution = price - cost;
