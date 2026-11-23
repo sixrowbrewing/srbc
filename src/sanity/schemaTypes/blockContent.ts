@@ -18,7 +18,7 @@ export const blockContentType = defineType({
         title: "Starting monthly sales (litres)",
         type: "number",
         initialValue: 25000,
-        validation: (rule) => rule.required().integer().min(0).max(36000),
+        validation: (rule) => rule.required().integer().min(0).max(75000),
       }],
       preview: { prepare: () => ({ title: "Brewery ROI Calculator" }) },
     }),
