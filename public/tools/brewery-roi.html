@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Brewery ROI calculator · Six Row Brewing</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#21392f;background:#fbfaf5;font:16px/1.45 system-ui,sans-serif}main{max-width:800px;margin:auto;padding:clamp(16px,4vw,32px)}h1{font:600 clamp(23px,5vw,36px)/1.2 Georgia,serif;margin:0 0 22px}label,summary{font-weight:600}input{accent-color:#246248}input[type=range]{width:100%;height:36px;margin:0}input[type=number]{display:block;background:#fff;color:#21392f;border:1px solid #aab7a9;border-radius:6px;padding:9px;width:100%;font-size:16px}.volume{font-size:1.2rem}.rail{position:relative}.tick{position:absolute;height:8px;border-left:2px solid #65491a;bottom:0;pointer-events:none}#threshold{margin:6px 0 18px}.metrics,.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(145px,100%),1fr));gap:10px}.metric{background:#e9efe6;padding:12px;border-radius:8px}.metric strong{display:block;font-size:1.35rem}.fields{margin-top:12px}.fields label{font-size:14px}summary{padding:12px 0;cursor:pointer}small{display:block;color:#526459;margin-top:12px}p{margin:10px 0}
+</style></head><body><main><h1>Brewery ROI calculator</h1>
+<label class="volume" for="slider">Monthly beer sales · <output id="volume">25,000 L</output></label>
+<div class="rail"><input type="range" min="0" max="36000" step="1" value="25000" id="slider"><span class="tick" id="tick" aria-hidden="true"></span></div>
+<p id="threshold"></p><div class="metrics" aria-live="polite">
+<div class="metric"><span id="status">Monthly surplus</span><strong id="surplus"></strong></div><div class="metric">Annual operating return<strong id="return"></strong></div><div class="metric">Simple payback<strong id="payback"></strong></div></div>
+<details><summary>Edit sales and brewery assumptions</summary><div class="fields">
+<label>Sales (L/month)<input id="sales" type="number" value="25000" min="0" max="36000" required></label>
+<label>Investment (₹ crore)<input id="investment" type="number" value="2" min="0.000001" step="any" required></label>
+<label>Fixed costs (₹ lakh/month)<input id="fixed" type="number" value="16" min="0" step="any" required></label>
+<label>Net selling price (₹/L)<input id="price" type="number" value="200" min="0" step="any" required></label>
+<label>Variable cost (₹/L sold)<input id="cost" type="number" value="120" min="0" step="any" required></label>
+</div></details><small>Illustrative figures. Assumes steady sales over 30-day months. Excludes financing, tax and future capital spending.</small></main>
+<script>
+const get=id=>document.getElementById(id);
+const set=(id,value)=>{get(id).textContent=value};
+const fmt=value=>value.toLocaleString('en-IN',{maximumFractionDigits:2});
+const slider=get('slider'),sales=get('sales');
+const preset=new URLSearchParams(location.search).get('sales');
+if(preset && /^\d+$/.test(preset) && Number(preset)<=36000) sales.value=preset;
+function update(event){
+  if(event?.target===slider) sales.value=slider.value;
+  const valid=[...document.querySelectorAll('input[type=number]')].every(field=>field.validity.valid);
+  if(!valid){
+    for(const id of ['volume','surplus','return','payback']) set(id,'—');
+    set('threshold','Enter sales between 0 and 36,000 L, a positive investment, and valid non-negative prices and costs.');
+    get('tick').hidden=true;return;
+  }
+  const units=sales.valueAsNumber,margin=get('price').valueAsNumber-get('cost').valueAsNumber;
+  const fixed=get('fixed').valueAsNumber*100000,capital=get('investment').valueAsNumber*10000000;
+  const surplus=Math.round((units*margin-fixed)*100)/100;
+  const target=margin>0?Math.ceil(fixed/margin):null;
+  slider.value=sales.value;
+  set('volume',fmt(units)+' L');
+  set('threshold',target!==null?'Break-even at '+fmt(target)+' L/month · '+fmt(Math.ceil(target/30))+' L/day':fixed>0?'No break-even volume at this contribution.':margin===0?'Break-even at all volumes.':'Break-even only at zero sales.');
+  const tick=get('tick');tick.hidden=target===null || target>36000;
+  if(!tick.hidden) tick.style.left='calc(8px + (100% - 16px) * '+target/36000+')';
+  set('status',surplus<0?'Monthly loss':surplus===0?'Monthly balance':'Monthly surplus');
+  const magnitude=Math.abs(surplus);
+  set('surplus',magnitude>=100000?'₹'+fmt(magnitude/100000)+' lakh':'₹'+fmt(magnitude));
+  set('return',fmt(1200*surplus/capital)+'%');
+  set('payback',surplus>0?fmt(Math.ceil(capital/surplus))+' months':'No payback');
+}
+document.addEventListener('input',update);update();
+if(window.parent!==window){
+  new ResizeObserver(()=>parent.postMessage({type:'brewery-roi-height',height:document.querySelector('main').offsetHeight},location.origin)).observe(document.querySelector('main'));
+}
+</script></body></html>
