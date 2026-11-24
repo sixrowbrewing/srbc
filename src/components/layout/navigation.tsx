@@ -12,6 +12,9 @@ import { siteConfig } from "@/lib/site";
 import { services } from "@/content/services";
 import logo from "@/assets/srbclogo.png";
 
+const calculatorPath = "/blog/brewery-roi-calculator";
+const calculatorHref = `${calculatorPath}#brewery-roi-calculator`;
+
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -150,10 +153,23 @@ export function Navigation() {
 
             <li>
               <Link
+                href={calculatorHref}
+                className={cn(
+                  "text-sm font-medium transition-colors",
+                  pathname === calculatorPath
+                    ? "text-primary"
+                    : "text-foreground/75 hover:text-primary",
+                )}
+              >
+                Brewery ROI Calculator
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/blog"
                 className={cn(
                   "text-sm font-medium transition-colors",
-                  pathname.startsWith("/blog")
+                  pathname.startsWith("/blog") && pathname !== calculatorPath
                     ? "text-primary"
                     : "text-foreground/75 hover:text-primary",
                 )}
@@ -242,6 +258,15 @@ export function Navigation() {
                     </li>
                   </ul>
                 )}
+              </li>
+              <li>
+                <Link
+                  href={calculatorHref}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block rounded-md px-3 py-3 text-base font-medium text-foreground hover:bg-muted"
+                >
+                  Brewery ROI Calculator
+                </Link>
               </li>
               <li>
                 <Link
