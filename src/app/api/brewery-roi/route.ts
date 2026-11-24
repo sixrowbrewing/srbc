@@ -35,6 +35,7 @@ export async function POST(request: Request) {
     "Monthly operating " + (surplus < 0 ? "loss" : "surplus") + ": ₹" + format(Math.abs(surplus)),
     "Simple annual operating return: " + format(1200 * surplus / capital) + "%",
     "Simple payback: " + (surplus > 0 ? format(Math.ceil(capital / surplus)) + " months" : "No payback at this volume"),
+    "Monthly operating profit after payback: " + (surplus > 0 ? "₹" + format(surplus) + " per month" : "Payback not reached"),
     "", "Assumes steady sales. Excludes financing, tax and future capital spending."
   ].join("\n");
   try {
