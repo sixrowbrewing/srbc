@@ -19,9 +19,9 @@ export function BreweryRoi({ initialSales = 25000 }: { initialSales?: number }) 
   }, []);
 
   return (
-    <iframe ref={frame} title="Interactive brewery ROI calculator"
+    <iframe id="brewery-roi-calculator" ref={frame} title="Interactive brewery ROI calculator"
       src={`/tools/brewery-roi.html?sales=${initialSales}`}
-      className="mt-8 w-full rounded-xl border" style={{ height }}
+      className="mt-8 scroll-mt-24 w-full rounded-xl border" style={{ height }}
       onLoad={() => {
         const main = frame.current?.contentDocument?.querySelector("main");
         if (main) setHeight(main.offsetHeight + 2);
