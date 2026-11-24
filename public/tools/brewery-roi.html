@@ -7,7 +7,8 @@
 <label class="volume" for="slider">Expected monthly sales · <output id="volume">25,000 L</output></label>
 <div class="rail"><input type="range" min="0" max="75000" step="1" value="25000" id="slider"><span class="tick" id="tick" aria-hidden="true"></span></div>
 <p id="threshold"></p><p id="gap" aria-live="polite"></p><div hidden id="results" class="metrics" aria-live="polite">
-<div class="metric"><span id="status">Monthly surplus</span><strong id="surplus"></strong></div><div class="metric">Annual operating return<strong id="return"></strong></div><div class="metric">Simple payback<strong id="payback"></strong></div></div>
+<div class="metric"><span id="status">Monthly surplus</span><strong id="surplus"></strong></div><div class="metric">Annual operating return<strong id="return"></strong></div><div class="metric">Simple payback<strong id="payback"></strong></div>
+<div class="metric" style="grid-column:1/-1">Monthly operating profit after payback<strong id="afterPayback"></strong></div></div>
 <details><summary>Edit sales and brewery assumptions</summary><div class="fields">
 <label>Sales (L/month)<input id="sales" type="number" value="25000" min="0" max="75000" required></label>
 <label>Investment (₹ crore)<input id="investment" type="number" value="2" min="0.000001" step="any" required></label>
@@ -31,7 +32,7 @@ function update(event){
   if(event?.target===slider) sales.value=slider.value;
   const valid=[...document.querySelectorAll('input[type=number]')].every(field=>field.validity.valid);
   if(!valid){
-    for(const id of ['volume','surplus','return','payback']) set(id,'—');
+    for(const id of ['volume','surplus','return','payback','afterPayback']) set(id,'—');
     set('gap','');
     set('threshold','Enter sales between 0 and 75,000 L, a positive investment, and valid non-negative prices and costs.');
     get('tick').hidden=true;return;
@@ -57,6 +58,7 @@ function update(event){
   set('surplus',magnitude>=100000?'₹'+fmt(magnitude/100000)+' lakh':'₹'+fmt(magnitude));
   set('return',fmt(1200*surplus/capital)+'%');
   set('payback',surplus>0?fmt(Math.ceil(capital/surplus))+' months':'No payback');
+  set('afterPayback', surplus > 0 ? get('surplus').textContent + ' per month' : 'Payback not reached');
 }
 let attempt;
 const fields=['sales','investment','fixed','price','cost'];
