@@ -80,7 +80,7 @@ export function Navigation() {
           <span className="sr-only">{siteConfig.shortName}</span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden md:block">
+        <nav aria-label="Primary" className="hidden lg:block">
           <ul className="flex items-center gap-7">
             <li ref={servicesRef} className="relative">
               <button
@@ -152,6 +152,11 @@ export function Navigation() {
             </li>
 
             <li>
+              <Link href="/tools" className={cn("text-sm font-medium transition-colors", pathname.startsWith("/tools") ? "text-primary" : "text-foreground/75 hover:text-primary")}>
+                Brewing Tools
+              </Link>
+            </li>
+            <li>
               <Link
                 href={calculatorHref}
                 className={cn(
@@ -204,7 +209,7 @@ export function Navigation() {
         <button
           type="button"
           onClick={() => setIsMenuOpen((open) => !open)}
-          className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -258,6 +263,11 @@ export function Navigation() {
                     </li>
                   </ul>
                 )}
+              </li>
+              <li>
+                <Link href="/tools" onClick={() => setIsMenuOpen(false)} className="block rounded-md px-3 py-3 text-base font-medium text-foreground hover:bg-muted">
+                  Brewing Tools
+                </Link>
               </li>
               <li>
                 <Link
